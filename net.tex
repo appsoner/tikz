@@ -119,12 +119,20 @@ edge [->, bend right=45] (semaphore);
 \node[place]    (semaphore)   [below of=critical] {};
 \node[transition] (leave cirtical) [right of=critical] {}
 edge [pre] (critical)
-edge [post, bend right] (waiting)
+edge [post, bend right] node[auto,swap] {2} (waiting)
 edge [pre,bend left] (semaphore);
 \node[transition] (enter critical) [left of=critical] {}
 edge [post] (critical)
 edge [pre ,bend left] (waiting)
 edge [post ,bend right] (semaphore);
+\end{tikzpicture}
+\begin{tikzpicture}[auto, bend right]
+\node (a) at (0:1) {$0^\circ$};
+\node (b) at (120:1) {$120^\circ$};
+\node (c) at (240:1) {$240^\circ$};
+\draw (a) to node{1} node [swap] {1'} (b)
+	  (b) to node{2} node [swap] {2'} (c)
+	  (c) to node{3} node [swap] {3'} (a);
 \end{tikzpicture}
 \end{document}
 
